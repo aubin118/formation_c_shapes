@@ -2,6 +2,9 @@
 using Serie_II;
 using Serie_III;
 using Serie_VI;
+using Serie2_I;
+using Serie2_II;
+using Serie2_III;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -15,65 +18,8 @@ namespace exercice_S1
     internal class Program
     {
         static void Main(string[] args)
+
         {
-            /*ElementaryOperations.BasicOperation(6, 4, '+');
-            ElementaryOperations.BasicOperation(6, 4, '-');
-            ElementaryOperations.BasicOperation(3, 4, '-');
-            ElementaryOperations.BasicOperation(6, 4, '*');
-            ElementaryOperations.BasicOperation(6, 4, '/');
-            ElementaryOperations.BasicOperation(6, 0, '/');
-            ElementaryOperations.BasicOperation(6, 4, 'e');
-
-            ElementaryOperations.IntegerDivision(6, 4);
-            ElementaryOperations.IntegerDivision(8, 4);
-            ElementaryOperations.IntegerDivision(6, 0);
-
-            ElementaryOperations.Pow(6, 2);
-            ElementaryOperations.Pow(6, -2);
-
-            string message = SpeakingClock.GoodDay(1);
-            Console.WriteLine(message);
-            message = SpeakingClock.GoodDay(8);
-            Console.WriteLine(message);
-            message = SpeakingClock.GoodDay(12);
-            Console.WriteLine(message);
-            message = SpeakingClock.GoodDay(14);
-            Console.WriteLine(message);
-            message = SpeakingClock.GoodDay(18);
-            Console.WriteLine(message);
-            message = SpeakingClock.GoodDay(23); 
-            Console.WriteLine(message);
-            message = SpeakingClock.GoodDay(-1);
-            Console.WriteLine(message);
-            message = SpeakingClock.GoodDay(102);
-            Console.WriteLine(message);
-            
-*/
-            Pyramid.PyramidConstruction(10, false);
-            int x = 12;
-            long a;
-            Stopwatch sw = Stopwatch.StartNew();
-
-            sw.Restart();
-            Factorial.Factorial_(x);
-            sw.Stop();
-            Console.WriteLine($"temps factorial  {sw.ElapsedTicks}");
-            sw.Restart();
-
-            sw.Start();
-            Factorial.FactorialRecursive(x, x);
-            sw.Stop();
-            Console.WriteLine($"temps factorial recursive  {sw.ElapsedTicks}");
-            sw.Restart();
-
-            sw.Start();
-            a = Factorial.FactorialRecursivevrai(x);
-            Console.Write($" {x}! = {a} ");
-            sw.Stop();
-            Console.WriteLine($"temps factorial recursive 'vrai' {sw.ElapsedTicks}");
-
-            
-            */
             /*int x = 12 - 2 * 3;
             Console.WriteLine("La valeur de x est : " + x);
             string entree = Console.ReadLine();
@@ -118,13 +64,189 @@ namespace exercice_S1
             }
             int d = additionentier(ref z, 5);
             */
+
+
+            ////////// ex 1 et 2 de la serie I 
+
+
+            /*ElementaryOperations.BasicOperation(6, 4, '+');
+            ElementaryOperations.BasicOperation(6, 4, '-');
+            ElementaryOperations.BasicOperation(3, 4, '-');
+            ElementaryOperations.BasicOperation(6, 4, '*');
+            ElementaryOperations.BasicOperation(6, 4, '/');
+            ElementaryOperations.BasicOperation(6, 0, '/');
+            ElementaryOperations.BasicOperation(6, 4, 'e');
+
+            ElementaryOperations.IntegerDivision(6, 4);
+            ElementaryOperations.IntegerDivision(8, 4);
+            ElementaryOperations.IntegerDivision(6, 0);
+
+            ElementaryOperations.Pow(6, 2);
+            ElementaryOperations.Pow(6, -2);
+
+            string message = SpeakingClock.GoodDay(1);
+            Console.WriteLine(message);
+            message = SpeakingClock.GoodDay(8);
+            Console.WriteLine(message);
+            message = SpeakingClock.GoodDay(12);
+            Console.WriteLine(message);
+            message = SpeakingClock.GoodDay(14);
+            Console.WriteLine(message);
+            message = SpeakingClock.GoodDay(18);
+            Console.WriteLine(message);
+            message = SpeakingClock.GoodDay(23); 
+            Console.WriteLine(message);
+            message = SpeakingClock.GoodDay(-1);
+            Console.WriteLine(message);
+            message = SpeakingClock.GoodDay(102);
+            Console.WriteLine(message);
+            */
+
+
+            ////////// ex 3 et 4 de la serie I 
+
+
+            /*
+            Pyramid.PyramidConstruction(10, false);
+            int x = 12;
+            long a;
+            Stopwatch sw = Stopwatch.StartNew();
+
+            sw.Restart();
+            Factorial.Factorial_(x);
+            sw.Stop();
+            Console.WriteLine($"temps factorial  {sw.ElapsedTicks}");
+            sw.Restart();
+
+            sw.Start();
+            Factorial.FactorialRecursive(x, x);
+            sw.Stop();
+            Console.WriteLine($"temps factorial recursive  {sw.ElapsedTicks}");
+            sw.Restart();
+
+            sw.Start();
+            a = Factorial.FactorialRecursivevrai(x);
+            Console.Write($" {x}! = {a} ");
+            sw.Stop();
+            Console.WriteLine($"temps factorial recursive 'vrai' {sw.ElapsedTicks}");
+            */
+
+
+            ////////// taskstable
+
+
+            /*
+            int[] tab = {1,5,3,9,7,5,65,85,4 };
+            Console.WriteLine("tableaux de base");
+            print_tab (tab);
+
+            int somme = TasksTables.SumTab(tab);
+            Console.WriteLine("somme : " + somme);
+
+            tab = TasksTables.OpeTab(tab, '*', 2);
+
+            Console.WriteLine("tableau apres operation");
+            print_tab(tab);
+
+
+            Console.WriteLine("tableau ajouté");
+            int[] tab_ajout = { 1, 5, 85, 4 };
+            print_tab(tab_ajout);
+
+            int[] tab_concat = new int[tab.Length + tab_ajout.Length];
+            tab_concat = TasksTables.ConcatTab(tab,tab_ajout);
+            
+            Console.WriteLine("tableau apres concatenation");
+            print_tab (tab_concat);
+            */
+
+
+            ////////// morpion
+
+
+            /*
+            char[,] tab2d = { { 'X', 'X', 'O' }, { 'X', 'O', 'O' },{ '_', 'X', '_' } };
+            
+            Morpion.DisplayMorpion(tab2d);
+
+            Console.WriteLine(Morpion.CheckMorpion(tab2d));
+            tab2d[2, 0] = 'X';
+            
+
+            Morpion.DisplayMorpion(tab2d);
+            
+            Console.WriteLine(Morpion.CheckMorpion(tab2d));
+            tab2d[2, 0] = 'O';
+            tab2d[2, 2] = 'O';
+
+            Morpion.DisplayMorpion(tab2d);
+
+            Console.WriteLine(Morpion.CheckMorpion(tab2d));
+            tab2d[1, 1] = 'X';
+            tab2d[0, 2] = 'X';
+            tab2d[0, 1] = 'O';
+
+            Morpion.DisplayMorpion(tab2d);
+
+            Console.WriteLine(Morpion.CheckMorpion(tab2d));
+            */
+
+
+            ////////// recherche
+
+
+            int[] tab = { 1, 3, 5, 9, 17, 25, 65, 85, 94 };
+            string val;
+            Console.WriteLine(" Entrer le nombre a trouve ou entrer fin pour l'arreter");
+            val = Console.ReadLine();
+            int valeur ;
+            
+            while (val != "fin")
+            {
+                bool test = int.TryParse(val, out valeur);
+
+                if (test)
+                {
+                    int a = Search.LinearSearch(tab, valeur);
+                    if (a == -1)
+                    {
+                        Console.WriteLine(valeur + " n'a pas été trouvé");
+                    }
+                    else
+                    {
+                        Console.WriteLine(valeur + " a été trouvé en position " + a);
+                    }
+
+                    int b = Search.BinarySearch(tab, valeur);
+                    if (b == -1)
+                    {
+                        Console.WriteLine(valeur + " n'a pas été trouvé");
+                    }
+                    else
+                    {
+                        Console.WriteLine(valeur + " a été trouvé en position " + b);
+                    }
+                    
+                }
+                else
+                {
+                    Console.WriteLine("l'entree n'est pas nombre entier permis pour un int"); 
+                }
+                val = Console.ReadLine();
+            }
+
+
             Console.ReadKey();
            
         }
-        public static int additionentier(ref int a, int b)
+        public static void print_tab ( int [] tab )
         {
-            a++;
-            return a + b; 
+            Console.Write("tab : [");
+            foreach (int e in tab)
+            {
+                Console.Write(" " + e + ",");
+            }
+            Console.WriteLine("]");
         }
         
     }
