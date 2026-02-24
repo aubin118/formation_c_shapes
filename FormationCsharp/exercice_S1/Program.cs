@@ -1,10 +1,13 @@
-﻿using System;
+﻿using Serie_I;
+using Serie_II;
+using Serie_III;
+using Serie_VI;
+using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Serie_I;
-using Serie_II;
 
 namespace exercice_S1
 {
@@ -13,7 +16,7 @@ namespace exercice_S1
     {
         static void Main(string[] args)
         {
-            ElementaryOperations.BasicOperation(6, 4, '+');
+            /*ElementaryOperations.BasicOperation(6, 4, '+');
             ElementaryOperations.BasicOperation(6, 4, '-');
             ElementaryOperations.BasicOperation(3, 4, '-');
             ElementaryOperations.BasicOperation(6, 4, '*');
@@ -44,8 +47,33 @@ namespace exercice_S1
             Console.WriteLine(message);
             message = SpeakingClock.GoodDay(102);
             Console.WriteLine(message);
+            
+*/
+            Pyramid.PyramidConstruction(10, false);
+            int x = 12;
+            long a;
+            Stopwatch sw = Stopwatch.StartNew();
 
+            sw.Restart();
+            Factorial.Factorial_(x);
+            sw.Stop();
+            Console.WriteLine($"temps factorial  {sw.ElapsedTicks}");
+            sw.Restart();
 
+            sw.Start();
+            Factorial.FactorialRecursive(x, x);
+            sw.Stop();
+            Console.WriteLine($"temps factorial recursive  {sw.ElapsedTicks}");
+            sw.Restart();
+
+            sw.Start();
+            a = Factorial.FactorialRecursivevrai(x);
+            Console.Write($" {x}! = {a} ");
+            sw.Stop();
+            Console.WriteLine($"temps factorial recursive 'vrai' {sw.ElapsedTicks}");
+
+            
+            */
             /*int x = 12 - 2 * 3;
             Console.WriteLine("La valeur de x est : " + x);
             string entree = Console.ReadLine();
