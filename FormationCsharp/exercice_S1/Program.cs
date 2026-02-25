@@ -5,16 +5,45 @@ using Serie_VI;
 using Serie2_I;
 using Serie2_II;
 using Serie2_III;
+using Serie3;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace exercice_S1
 {
+    public enum Sexe
+    {
+        masculin,
+        feminin,
+        nonbinaire
+    }
 
+    public struct identité
+    {
+        public string Nom;
+        public string Prenom;
+        public DateTime Datenaissance;
+        public int Age;
+        public Sexe Sexe;
+
+        public identité(string nom, string prenom, DateTime datenaissance, int age, Sexe sexe)
+        {
+            Nom = nom;
+            Prenom = prenom;
+            Datenaissance = datenaissance;
+            Age= age;
+            Sexe = sexe;
+        }
+        public override string ToString()
+        {
+            return ($"{Nom}, {Prenom}, date de naissance : {Datenaissance.ToString("dd/MM/yyyy")}, {Age} an, {Sexe}");
+        }
+    }
     internal class Program
     {
         static void Main(string[] args)
@@ -63,7 +92,10 @@ namespace exercice_S1
                 Console.WriteLine($"la valeur de y est sup à 22");
             }
             int d = additionentier(ref z, 5);
-            */
+            
+            StringBuilder str = new StringBuilder();
+                str.Append("bob");
+*/
 
 
             ////////// ex 1 et 2 de la serie I 
@@ -194,7 +226,7 @@ namespace exercice_S1
 
             ////////// recherche
 
-
+            /*
             int[] tab = { 1, 3, 5, 9, 17, 25, 65, 85, 94 };
             string val;
             Console.WriteLine(" Entrer le nombre a trouve ou entrer fin pour l'arreter");
@@ -234,12 +266,49 @@ namespace exercice_S1
                 }
                 val = Console.ReadLine();
             }
+            */
 
+            Console.WriteLine("Texte d'entrée : ");
+            string phrasemenace = Console.ReadLine();
+            string[] mot_interdit = { "dollars", " Reagan", " Afghanistan", "ouest", "crime", " defaite" };
+            string phrasepurifier = AdministrativeTasks.EliminateSeditiousThoughts(phrasemenace, mot_interdit);
+            Console.Write("Censure des mots suivants : ");
+            print_tab_string(mot_interdit);
 
-            Console.ReadKey();
+            Console.WriteLine("Texte de sortie : ");
+            Console.WriteLine(phrasepurifier);
+
+            Console.WriteLine("Recencement des résidents : ");
+            string info_resident1 = "M.  Slovaman    Dmitri      25";
+            Console.WriteLine("Ligne 1 : " + info_resident1);
+            if (AdministrativeTasks.ControlFormat(info_resident1))
+            {
+                Console.WriteLine("Format OK ");
+            }
+            else
+            {
+                Console.WriteLine("Format KO");
+            }
+
+            /*
+            bool existe = File.Exists(@"C:\Users\Formation\Desktop\tkt.txt");
+            bool existe2 = File.Exists("Cestunfichierdetest.txt");
+            using (FileStream file = new FileStream(@"C:\Users\Formation\Desktop\tkt.txt", FileMode.Open, FileAccess.Read))
+            { using (StreamReader str = new StreamReader(file))
+                { while (!str.EndOfStream)
+                    {
+                        Console.WriteLine(str.ReadLine());
+                    }
+
+                } 
+            }
+            FileStream file2 = File.OpenWrite("Cestunfichierdetest.txt");
+
+            file2.Dispose();*/
+                Console.ReadKey();
            
         }
-        public static void print_tab ( int [] tab )
+        public static void print_tab_int ( int [] tab )
         {
             Console.Write("tab : [");
             foreach (int e in tab)
@@ -248,6 +317,23 @@ namespace exercice_S1
             }
             Console.WriteLine("]");
         }
-        
+        public static void print_tab_string(string[] tab)
+        {
+            Console.Write("[");
+            foreach (string e in tab)
+            {
+                Console.Write(" " + e + ",");
+            }
+            Console.WriteLine("]");
+        }
+        public static int AdditionEntiers(params int [] tab)
+        {
+                int res = 0;
+                foreach (int e in tab)
+                { res += e; }
+            return res;
+            
+        }
+            
     }
 }
