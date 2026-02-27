@@ -8,9 +8,11 @@ using Serie2_III;
 using Serie3;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Runtime.Remoting.Messaging;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -44,11 +46,174 @@ namespace exercice_S1
             return ($"{Nom}, {Prenom}, date de naissance : {Datenaissance.ToString("dd/MM/yyyy")}, {Age} an, {Sexe}");
         }
     }
+
+
+    public class B 
+
+    {
+        protected string Identifiant { get; set; } /// protected permet de laisser l'acces au classe fille sans laisser pour l'exterieur
+
+        public B (string ident)
+            {
+            Identifiant = ident;
+            }
+        public void Affichagemasque()
+        {
+            Console.WriteLine($"Instance de B : {Identifiant}");
+        }
+        public virtual void Affichageoverride()
+        {
+            Console.WriteLine($"Instance de B : {Identifiant}");
+        }
+    }
+
+    public class A : B   /// classe A herite de B
+    {
+        public int Age {  get; set; }   
+
+        public A(string  ident, int age) : base(ident) 
+        {
+            Age = age;
+        }
+        public int Operation(int a,int b)
+        {
+            Console.WriteLine($"Identifaint operation {Identifiant}");
+            return a + b + Age;
+
+        }
+        public new void Affichagemasque()
+        {
+            
+            Console.WriteLine($"Instance de A : {Identifiant}");
+        }
+        sealed public override void Affichageoverride()  /// se reecrit a la place de la virtuel
+        /// sealed empeche que cette variable soit override
+        {
+            Console.WriteLine($"Instance de A : {Identifiant}");
+        }
+    }
+    public class Voiture
+    {
+        private static int _nbvoitures = -1;
+
+        public static int Nbrvoitures { get { return _nbvoitures; } } 
+
+        private readonly string _marque;
+        private double _vitesse;
+        private double _x;
+        private double _y;
+        private string _nomUtilisateur;
+
+        public const double g = 9.81; //// considéré comme étant static et non modifiable dans constructeur static
+
+        public static readonly DateTime DateJour; //// considéré comme étant static mais modifiable uniquement dans le constructeur statique
+
+        public Voiture( string marque, string nomutilisateur) 
+        {
+            _marque = marque;
+            _nomUtilisateur = nomutilisateur;
+            _vitesse = 0.0;
+            _x = 0.0;
+            _y = 0.0;
+            X = 0;
+            _nbvoitures++;
+
+        }
+
+        static Voiture() 
+        {
+            _nbvoitures = 0;
+            DateJour = DateTime.Today;
+        }
+
+
+        public double X { get; private set; }
+        public override string ToString()
+        {
+            return $"Voici la voiture de {_nomUtilisateur}, de marque {_marque}";
+        }
+
+        public void Accelération ( double deltaVitesse) 
+        {
+            if (deltaVitesse == 0.0)
+            {
+                throw new ArgumentOutOfRangeException(nameof(deltaVitesse),$"Tu te moques de moi {_nomUtilisateur}");
+            }
+            _vitesse += deltaVitesse;
+            _x += deltaVitesse * 0.0001;
+        }
+
+        public void Accelération(double deltaVitesse , double delta)
+        {
+            if (deltaVitesse == 0.0)
+            {
+                throw new ArgumentOutOfRangeException(nameof(deltaVitesse), $"Tu te moques de moi {_nomUtilisateur}");
+            }
+            _vitesse += deltaVitesse;
+            _x += deltaVitesse * 0.0001;
+        }
+
+        public string Vitesse
+        {
+            get { return $"{_vitesse : ##.00} km/h"; } 
+            set 
+            {
+                bool estDouble = double.TryParse(value, out _vitesse);
+                if (!estDouble) { throw new ArgumentOutOfRangeException(nameof(value), "vitesse erronée"); }
+                
+            }
+        }
+        public double GetVitesse() 
+            { return _vitesse; }
+
+        public string Couleur
+        {
+            //           condition    vrai     faux
+            get { return _x < 0.0 ? "Rouge" : "Bleu"; }
+        }
+
+        public static void AffichageVoiture(Voiture voiture) 
+        {
+
+        }
+
+    }   
     internal class Program
     {
         static void Main(string[] args)
 
         {
+            Voiture voiture = new Voiture("Mercedes","Aubin");
+
+            Console.WriteLine(voiture.GetVitesse());
+            voiture.Vitesse = "30,25";
+            Console.WriteLine(voiture.Vitesse);
+            Console.WriteLine(Voiture.Nbrvoitures);
+
+            Console.WriteLine( voiture.ToString() );
+
+
+
+
+            B b = new A("aubin", 23);
+
+            b.Affichagemasque();
+            b.Affichageoverride();
+
+            if (b is A)
+            {
+                A aprov = b as A;
+                Console.WriteLine(aprov.Age);
+                aprov.Affichagemasque();
+                aprov.Affichageoverride();
+                List<B> list = new List<B> (){b, aprov};
+                foreach (B item in list)
+                {
+                    item.Affichagemasque();
+                }
+            }
+            
+
             /*int x = 12 - 2 * 3;
             Console.WriteLine("La valeur de x est : " + x);
             string entree = Console.ReadLine();
@@ -108,7 +273,6 @@ namespace exercice_S1
                     {
                         Console.WriteLine(str.ReadLine());
                     }
-
                 }
             }
                 
@@ -354,6 +518,8 @@ namespace exercice_S1
 
             ///// code Morse
 
+
+            /*
             Morse Jules = new Morse();
             string phrase_codee = "=.===.=.=...=.....===.===...===.===.===...===.=...===.....=.=.=...=.===...=.=...===.=...===.....===.===...=.=...===.=.===.=...=.=.=.=...=...=.===.=.=";
             int nb_lettre=Jules.LettersCount(phrase_codee);
@@ -362,6 +528,8 @@ namespace exercice_S1
             string phrase_decodee = Jules.MorseTranslation(phrase_codee);
             Console.WriteLine("phrase decodee : ");
             Console.WriteLine(phrase_decodee);
+            */
+
 
             Console.ReadKey();
            
