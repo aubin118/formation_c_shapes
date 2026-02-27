@@ -6,6 +6,7 @@ using System.Security;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace Serie3
 {
@@ -37,20 +38,30 @@ namespace Serie3
             { return false; }
 
             char verif;
-            for (int i = 0; i > 24; i++)
+            for (int i = 0; i < 24; i++)
             {
-                Console.WriteLine($"passe {i}");
 
-                char.TryParse(line.Substring(5 + i, i), out verif);
-
+                char.TryParse(line.Substring(4 + i, 1), out verif);
+                
                 if (!alphabet.Any(v => v == verif)) // verif.IsLetter
-                { return false; }
+                {
+                    
+                    return false; 
+                }
             }
             char.TryParse(line.Substring(28, 1), out verif);
-            if (!numéro.Any(v => v == verif)) { return false; }
+            if (!numéro.Any(v => v == verif)) 
+            {
+                
+                return false; 
+            }
                 
             char.TryParse(line.Substring(29, 1), out verif);
-            if (!numéro.Any(v => v == verif)) { return false; }
+            if (!numéro.Any(v => v == verif)) 
+            {
+                
+                return false; 
+            }
 
             return true;
         }
@@ -68,8 +79,64 @@ namespace Serie3
         /// <returns></returns>
         public static string ChangeDate(string report)
         {
-            //TODO
-            return string.Empty;
+            char verif;
+            char verif2;
+            char verif3;
+            bool test = true;
+            string date_correcte;
+            string mois_correct;
+            string jour_correct;
+            string annee_correcte;
+            string numéro = "0123456789";
+            StringBuilder sbtext = new StringBuilder();
+            sbtext.Append(report);
+            for (int i = 0 ; i < (report.Length - 10 ); i++ )
+            {
+                
+
+                char.TryParse(report.Substring( i, 1), out verif);
+                //Console.WriteLine($"passe {verif}");
+
+                if (numéro.Any(v => v == verif))
+                {
+                    //Console.WriteLine($"tiret {report.Substring(i, 10)} ");
+                    char.TryParse(report.Substring(i+4, 1), out verif);
+                    char.TryParse(report.Substring(i + 7, 1), out verif2);
+                    //Console.WriteLine($"tiret {verif}   {verif2} ");
+                    if ((verif == '-') && (verif2 == '-'))
+
+                    {
+                        for (int j = 0; j < 2; j++)
+                        {
+                            char.TryParse(report.Substring(i + 2 + j, 1), out verif);
+                            char.TryParse(report.Substring(i + 5 + j, 1), out verif2);
+                            char.TryParse(report.Substring(i + 8 + j, 1), out verif3);
+                            //Console.WriteLine($"chiffre {j} {verif}   {verif2} ");
+                            if ((!numéro.Any(v => v == verif)) || (!numéro.Any(v => v == verif)) || (!numéro.Any(v => v == verif2))) 
+                            {
+                                test = false;
+                            }
+                        }
+                        char.TryParse(report.Substring(i + 1, 1), out verif);
+                        if (!numéro.Any(v => v == verif))
+                        {
+                            test = false;
+                        }
+                            if (test)
+                        {
+                            jour_correct = report.Substring(i + 8, 2);
+                            mois_correct = report.Substring(i + 5, 2);
+                            annee_correcte = report.Substring(i + 2, 2);
+
+                            date_correcte = string.Concat(jour_correct, ".", mois_correct, ".", annee_correcte);
+                            sbtext.Replace(report.Substring(i, 10), date_correcte);
+                            i += 9;
+                        }
+                    }
+                }
+            }
+            report = sbtext.ToString();
+            return report;
         }
     }
 }

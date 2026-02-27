@@ -97,6 +97,27 @@ namespace exercice_S1
                 str.Append("bob");
 */
 
+            /*
+            bool existe = File.Exists(@"C:\Users\Formation\Desktop\tkt.txt");
+            bool existe2 = File.Exists("Cestunfichierdetest.txt");
+            using (FileStream file = new FileStream(@"C:\Users\Formation\Desktop\tkt.txt", FileMode.Open, FileAccess.Read))
+            {
+                using (StreamReader str = new StreamReader(file))
+                {
+                    while (!str.EndOfStream)
+                    {
+                        Console.WriteLine(str.ReadLine());
+                    }
+
+                }
+            }
+                
+            FileStream file2 = File.OpenWrite("Cestunfichierdetest.txt");
+
+                
+            file2.Dispose();
+            */
+
 
             ////////// ex 1 et 2 de la serie I 
 
@@ -268,6 +289,11 @@ namespace exercice_S1
             }
             */
 
+
+            /////////tache administrative
+
+
+            /*
             Console.WriteLine("Texte d'entrée : ");
             string phrasemenace = Console.ReadLine();
             string[] mot_interdit = { "dollars", " Reagan", " Afghanistan", "ouest", "crime", " defaite" };
@@ -277,6 +303,7 @@ namespace exercice_S1
 
             Console.WriteLine("Texte de sortie : ");
             Console.WriteLine(phrasepurifier);
+            
 
             Console.WriteLine("Recencement des résidents : ");
             string info_resident1 = "M.  Slovaman    Dmitri      25";
@@ -289,23 +316,54 @@ namespace exercice_S1
             {
                 Console.WriteLine("Format KO");
             }
+            
 
+            Console.WriteLine("Texte d'entrée : ");
+            string phrasemenace2 = "1994-12-05. Papi est parti le 1994-11-31. Ca soule. 1994-1e-05.  1e94-12-05.";
+            Console.WriteLine(phrasemenace2);
+            Console.WriteLine("Texte de sortie : ");
+            string phrasepurifier2 = AdministrativeTasks.ChangeDate(phrasemenace2);
+            Console.WriteLine(phrasepurifier2);
+            */
+
+
+            ///// code de Cesar
+
+
+            // ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz
             /*
-            bool existe = File.Exists(@"C:\Users\Formation\Desktop\tkt.txt");
-            bool existe2 = File.Exists("Cestunfichierdetest.txt");
-            using (FileStream file = new FileStream(@"C:\Users\Formation\Desktop\tkt.txt", FileMode.Open, FileAccess.Read))
-            { using (StreamReader str = new StreamReader(file))
-                { while (!str.EndOfStream)
-                    {
-                        Console.WriteLine(str.ReadLine());
-                    }
+            Console.WriteLine("Texte d'entrée : ");
+            string phrasecode = Console.ReadLine();
+            Console.WriteLine("Texte de sortie : ");
+            Cesar Jules = new Cesar();
+            phrasecode = Jules.CesarCode(phrasecode);
+            Console.WriteLine(phrasecode);
+            phrasecode = Jules.DecryptCesarCode(phrasecode);
+            Console.WriteLine(phrasecode);
 
-                } 
-            }
-            FileStream file2 = File.OpenWrite("Cestunfichierdetest.txt");
+            int cle = 152452;
+            Console.WriteLine();
+            Console.WriteLine("Texte d'entrée : ");
+            phrasecode = Console.ReadLine();
+            Console.WriteLine("Texte de sortie : ");
+            phrasecode = Jules.GeneralCesarCode(phrasecode,cle);
+            Console.WriteLine(phrasecode);
+            phrasecode = Jules.GeneralDecryptCesarCode(phrasecode,cle);
+            Console.WriteLine(phrasecode);
+            */
 
-            file2.Dispose();*/
-                Console.ReadKey();
+            ///// code Morse
+
+            Morse Jules = new Morse();
+            string phrase_codee = "=.===.=.=...=.....===.===...===.===.===...===.=...===.....=.=.=...=.===...=.=...===.=...===.....===.===...=.=...===.=.===.=...=.=.=.=...=...=.===.=.=";
+            int nb_lettre=Jules.LettersCount(phrase_codee);
+            int nb_mot = Jules.WordsCount(phrase_codee);
+            Console.WriteLine($"Nombre de mot : {nb_mot}  Nombre de lettre : {nb_lettre}   ");
+            string phrase_decodee = Jules.MorseTranslation(phrase_codee);
+            Console.WriteLine("phrase decodee : ");
+            Console.WriteLine(phrase_decodee);
+
+            Console.ReadKey();
            
         }
         public static void print_tab_int ( int [] tab )
