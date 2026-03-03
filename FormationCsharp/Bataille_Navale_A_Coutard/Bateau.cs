@@ -29,7 +29,6 @@ namespace Bataille_Navale
                 {
                     position.Touché();
                 }
-
             }
         }
 
@@ -41,16 +40,17 @@ namespace Bataille_Navale
             foreach (Position position in Positions)
             {
                 if (position.Statut == Position.Etat.Caché)
-                {  return false; }
-
+                {
+                    return false;
+                }
             }
             foreach (Position position in Positions)
             {
                 position.Coulé();
-
             }
             return true;
         }
+
         // <summary>
         /// Renvoie la position si celle-ci appartient au Bateau
         /// </summary>

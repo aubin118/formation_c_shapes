@@ -66,14 +66,16 @@ namespace Bataille_Navale
                 {
                     for (int i = 0; i < taille; i++)
                     {
-                        bateau.Positions.Add(new Position(valx, valy + i));
+                        bateau.Positions.Add(PlateauJeu[valx, valy + i]);
+                        //bateau.Positions.Add(new Position(valx, valy + i));
                     }
                 }
                 else
                 {
                     for (int i = 0; i < taille; i++)
                     {
-                        bateau.Positions.Add(new Position(valx + i, valy ));
+                        bateau.Positions.Add(PlateauJeu[valx + i, valy]);
+                        //bateau.Positions.Add(new Position(valx + i, valy ));
                     }
                 }
             }
@@ -123,18 +125,12 @@ namespace Bataille_Navale
                         Console.WriteLine("Valeur hors de la plage autorisée, appuyer pour continuer");
                         Console.ReadKey();
                     }
-
                 }
                 else 
                 {
                     Console.WriteLine("Format de coordonnées invalides, appuyer pour continuer");
                     Console.ReadKey();
                 }
-                
-
-                 
-
-				// Partie à implémenter
             }
 
             Console.ForegroundColor = ConsoleColor.White;
@@ -153,30 +149,31 @@ namespace Bataille_Navale
         /// <returns></returns>
         private bool PlacerBateau(int x, int y, int taille, bool estVertical)
         {
+            // Bien de prendre en compte les cas limites avant les foreach
             if (x <= 10 && y <= 10 && x >= 0 && y >= 0)
             {
                 if (estVertical)
                 {
-                    if (y + taille <= 10) 
+                    if (y + taille <= 10)
                     {
                         foreach (Bateau bateau in Bateaux)
                         {
                             foreach (Position position in bateau.Positions)
                             {
-                                if ((x-1 <=position.X & x + 1 >= position.X) && (y - 1 <= position.Y & y + taille + 1 >= position.Y)) 
+                                if ((x - 1 <= position.X & x + 1 >= position.X) && (y - 1 <= position.Y & y + taille + 1 >= position.Y))
                                 {
                                     return false;
                                 }
-
                             }
                         }
                         return true;
                     }
                 }
-                else 
+                else
                 {
                     if (x + taille <= 10)
                     {
+                        // Approche propre et fonctionnelle
                         foreach (Bateau bateau in Bateaux)
                         {
                             foreach (Position position in bateau.Positions)
@@ -190,7 +187,6 @@ namespace Bataille_Navale
                         }
                         return true;
                     }
-
                 }
             }
             return false;    
@@ -213,13 +209,12 @@ namespace Bataille_Navale
                         position.Touché();
                         toucher = true;
                         break;
-
                     }
-
                 }
             }
             if (toucher) 
             {
+                // Si les positions de PlateauJeu[x,y] étaient référencées dans les Bateaux, tu n'aurais pas besoin de faire ça
                 PlateauJeu[x, y].Touché();
             }
             else 
@@ -294,11 +289,11 @@ namespace Bataille_Navale
 		{
             foreach (Bateau bateau in Bateaux)
             {
+                // Il existe la méthode bateau.EstCoulé() si jamais
                 if (bateau.Positions[0].Statut != Position.Etat.Coulé) 
                 {
                     return false;
                 }
-
             }
             return true;
 		}
