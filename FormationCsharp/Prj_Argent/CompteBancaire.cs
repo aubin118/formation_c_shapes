@@ -13,84 +13,85 @@ namespace CptBanque
         Courant,
         Livret
     }
-    public class CptsB
+    public class CptB
     {
-        private Dictionary<long, long> _DictCpt;
-        private List <string> _TabNumCarte; 
-        private List <TypeCompte> _TabTypeCompte;
-        private List <decimal> _TabSolde;
+        public long _CptNumCpt { get; private set; }
+        public string _CptNumCarte { get; private set; }
+        public TypeCompte _CptTypeCompte { get; private set; }
+        public decimal _CptSolde { get; private set; }
 
-        private static int _nbcompte;
-        static CptsB()
-        {
-            _nbcompte = 0;
-        }
 
-        public void Add_cpt_line(string line)
+
+        public CptB (string line)
         {
-            string num_cpt_txt = line.Substring(0,line.IndexOf(';'));
-            line = line.Remove(0, line.IndexOf(';')+1);
+
+            string [] cpt_tab = line.Split(';');
+            
             long num_cpt ;
 
-            
-            char e;
-            int nb_virg = line.Count(v => v == ';');
-            ////  virgules faire verif
 
-
-            if (long.TryParse(num_cpt_txt, out num_cpt))
+            if (cpt_tab.Length == 4 && long.TryParse(cpt_tab[0], out num_cpt))
             {
-                if (!_DictCpt.ContainsKey(num_cpt))
-                {
-                    string num_carte = line.Substring(0, 16);
-                    line = line.Remove(0, 17);
+
                     long test_long;
-                  if (long.TryParse(line.Substring(0, 8), out test_long) && long.TryParse(line.Substring(8, 8), out test_long))
+                    if (cpt_tab[1].Length == 16 && long.TryParse(cpt_tab[1].Substring(0, 8), out test_long) && long.TryParse(cpt_tab[1].Substring(8, 8), out test_long))
                     {
-                        if (line.Substring(0, 7) == "Courant" || line.Substring(0, 6) == "Livret") 
+                        if (cpt_tab[2] == "Courant" || cpt_tab[2] == "Livret") 
                         {
-                            
-                            
-                            string solde_txt = line.Substring(line.LastIndexOf(';')+1, line.Length - line.LastIndexOf(';') + 1);
                             decimal solde;
-                            if (decimal.TryParse(solde_txt, out solde))
+                        if( string.IsNullOrWhiteSpace(cpt_tab[4]))
+                        { 
+                            if (decimal.TryParse(cpt_tab[4], out solde))
                             {
 
                                 if (line.Substring(0, 7) == "Courant")
                                 {
-                                    _TabTypeCompte.Add(TypeCompte.Courant);
+                                    _CptTypeCompte = TypeCompte.Courant;
                                 }
                                 else
                                 {
-                                    _TabTypeCompte.Add(TypeCompte.Livret);
+                                    _CptTypeCompte = TypeCompte.Livret;
                                 }
-                                _TabSolde.Add(solde);
-                                _TabNumCarte.Add(num_carte);
-                                _DictCpt.Add(num_cpt, _nbcompte);
-                                _nbcompte++;
-                            }
+                                _CptSolde = solde;
+                                _CptNumCarte = cpt_tab[1];
+                                _CptNumCpt = num_cpt;
 
+                            }
+                        }
+                        else
+                        {
+
+                            solde = 0;
+
+                            if (line.Substring(0, 7) == "Courant")
+                            {
+                                _CptTypeCompte = TypeCompte.Courant;
+                            }
+                            else
+                            {
+                                _CptTypeCompte = TypeCompte.Livret;
+                            }
+                            _CptSolde = solde;
+                            _CptNumCarte = cpt_tab[1];
+                            _CptNumCpt = num_cpt;
+                        }
                         }
                     }
-
-
-
-
-
-                    
-                    
-                } }
-
+                
+            }
         }
-
-
+        public bool MAJ_solde(decimal montant) 
+        {
+            if (_CptSolde + montant < 0)
+            { 
+                return false; 
+            }
+            else
+            { 
+                _CptSolde += montant;
+                return true;
+            }
+        }
     }
-    public class cpt 
-    {
-        public int identifiant { get; private set; }
-        public int NumCarte { get; private set; }
-        public TypeCompte TypeCpt { get; private set; }
-        public double Solde { get; private set; }
-
-    }
+    
 }
