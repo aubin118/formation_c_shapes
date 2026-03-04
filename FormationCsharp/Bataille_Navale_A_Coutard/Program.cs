@@ -1,15 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Bataille_Navale;
+﻿using Bataille_Navale;
 
 
 /////////// Réponse aux questions
 /*
 
-2) a) Le bateau est coulé si aucune de ses position sont restés cachés.
+2) a) Le bateau est coulé si aucune de ses positions sont restées à l'état "caché".
 
 7) a) La partie se termine lorsque tous les bateaux sont coulés.
 
