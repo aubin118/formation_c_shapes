@@ -26,10 +26,10 @@ namespace Prj_Argent
             DCB = entree.CB_fichier();
             DCpt = entree.Cpt_fichier();
 
-            foreach (KeyValuePair<long, CptB> e in DCpt)
+            /*foreach (KeyValuePair<long, CptB> e in DCpt)
             {
                 Console.WriteLine($"{e.Value._CptNumCpt}  {e.Value._CptSolde} ");
-            }
+            }*/
 
             entree.Transaction_fichier_open();
 
@@ -180,13 +180,13 @@ namespace Prj_Argent
                 }
             }
 
-            foreach (KeyValuePair<long, CptB> e in DCpt)
+            /*foreach (KeyValuePair<long, CptB> e in DCpt)
             {
                 Console.WriteLine($"{e.Value._CptNumCpt}  {e.Value._CptSolde} ");
-            }
+            }*/
             sortie.Fermer_status();
             entree.Transaction_Fermer();
-
+            Console.WriteLine("fin du traitement");
 
         }
         

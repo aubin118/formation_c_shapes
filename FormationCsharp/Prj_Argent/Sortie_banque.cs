@@ -22,7 +22,8 @@ namespace SBanque
             
             Console.WriteLine("Entrez le nom du chemin du fichier de sortie des transactions");
             NomFichier = Console.ReadLine();
-            NomFichier = "Resultat.txt";
+
+            ///NomFichier = "Resultat.txt";
 
 
            file = File.OpenWrite(NomFichier);

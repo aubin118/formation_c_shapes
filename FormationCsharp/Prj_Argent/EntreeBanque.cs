@@ -21,7 +21,8 @@ namespace EBanque
             {
                 Console.WriteLine("Entrez le nom du chemin du fichier des cartes");
                 NomFichier = Console.ReadLine();
-                NomFichier = "Cartes.csv";
+
+                ///NomFichier = "Cartes.csv";
 
             }
             FileStream file = File.Open((NomFichier), FileMode.Open, FileAccess.Read);
@@ -51,7 +52,8 @@ namespace EBanque
             {
                 Console.WriteLine("Entrez le nom du chemin du fichier des comptes");
                 NomFichier = Console.ReadLine();
-                NomFichier = "Comptes.csv";
+
+                ///NomFichier = "Comptes.csv";
             }
             FileStream file = File.Open((NomFichier), FileMode.Open, FileAccess.Read);
 
@@ -83,7 +85,8 @@ namespace EBanque
             {
                 Console.WriteLine("Entrez le nom du chemin du fichier d'entrée des transactions");
                 NomFichier = Console.ReadLine();
-                NomFichier = "Transactions.csv";
+
+                ///NomFichier = "Transactions.csv";
             }
             fileT = File.Open((NomFichier), FileMode.Open, FileAccess.Read);
             strT = new StreamReader(fileT);
