@@ -10,8 +10,8 @@ namespace CptBanque
 {
     public enum TypeCompte
     {
-        Courant,
-        Livret
+        Courant = 0,
+        Livret = 1
     }
     public class CptB
     {
@@ -39,12 +39,17 @@ namespace CptBanque
                         if (cpt_tab[2] == "Courant" || cpt_tab[2] == "Livret") 
                         {
                             decimal solde;
-                        if( string.IsNullOrWhiteSpace(cpt_tab[4]))
-                        { 
-                            if (decimal.TryParse(cpt_tab[4], out solde))
+                        
+
+                        if ( !string.IsNullOrWhiteSpace(cpt_tab[3]))
+                        {
+                            
+                            cpt_tab[3] = cpt_tab[3].Replace('.', ',');
+
+                            if (decimal.TryParse(cpt_tab[3], out solde) )
                             {
 
-                                if (line.Substring(0, 7) == "Courant")
+                                if (cpt_tab[2] == "Courant")
                                 {
                                     _CptTypeCompte = TypeCompte.Courant;
                                 }
@@ -63,7 +68,7 @@ namespace CptBanque
 
                             solde = 0;
 
-                            if (line.Substring(0, 7) == "Courant")
+                            if (cpt_tab[2] == "Courant")
                             {
                                 _CptTypeCompte = TypeCompte.Courant;
                             }
@@ -82,8 +87,9 @@ namespace CptBanque
         }
         public bool MAJ_solde(decimal montant) 
         {
+            
             if (_CptSolde + montant < 0)
-            { 
+            {
                 return false; 
             }
             else

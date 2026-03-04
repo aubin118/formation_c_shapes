@@ -21,6 +21,7 @@ namespace EBanque
             {
                 Console.WriteLine("Entrez le nom du chemin du fichier des cartes");
                 NomFichier = Console.ReadLine();
+                NomFichier = "Cartes.csv";
 
             }
             FileStream file = File.Open((NomFichier), FileMode.Open, FileAccess.Read);
@@ -31,7 +32,12 @@ namespace EBanque
                 {
                     CarteB carte = new CarteB(str.ReadLine());
                     if (!string.IsNullOrWhiteSpace(carte._CBNumCarte))
-                    { dict_carte.Add(carte._CBNumCarte, carte); }
+                    {
+                        if (!dict_carte.ContainsKey(carte._CBNumCarte))
+                        {
+                            dict_carte.Add(carte._CBNumCarte, carte);
+                        }
+                    }
                     
                 }
             }
@@ -45,7 +51,7 @@ namespace EBanque
             {
                 Console.WriteLine("Entrez le nom du chemin du fichier des comptes");
                 NomFichier = Console.ReadLine();
-
+                NomFichier = "Comptes.csv";
             }
             FileStream file = File.Open((NomFichier), FileMode.Open, FileAccess.Read);
 
@@ -55,8 +61,13 @@ namespace EBanque
                 while (!str.EndOfStream)
                 {
                     CptB cpt = new CptB(str.ReadLine());
-                    if (cpt._CptNumCpt != 0)
-                        { dict_cpt.Add(cpt._CptNumCpt, cpt); }
+                    if (cpt._CptNumCpt != 0) 
+                    {
+                        if (!dict_cpt.ContainsKey(cpt._CptNumCpt))
+                        {
+                            dict_cpt.Add(cpt._CptNumCpt, cpt);
+                        }
+                    }
                 }
             }
             file.Dispose();
@@ -70,9 +81,9 @@ namespace EBanque
             string NomFichier = " ";
             while (!File.Exists(NomFichier))
             {
-                Console.WriteLine("Entrez le nom du chemin du fichier des comptes");
+                Console.WriteLine("Entrez le nom du chemin du fichier d'entrée des transactions");
                 NomFichier = Console.ReadLine();
-
+                NomFichier = "Transactions.csv";
             }
             fileT = File.Open((NomFichier), FileMode.Open, FileAccess.Read);
             strT = new StreamReader(fileT);
@@ -80,9 +91,10 @@ namespace EBanque
         }
         public Transaction Transaction_lecture()
         {
+            
                 Transaction T = new Transaction(strT.ReadLine());
                 return T;
-    
+            
         }
         public void Transaction_Fermer()
         {

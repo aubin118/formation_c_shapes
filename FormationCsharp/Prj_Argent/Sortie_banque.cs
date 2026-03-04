@@ -18,14 +18,14 @@ namespace SBanque
 
         public Sortie() 
         {
-            string NomFichier = " ";
-            while (!File.Exists(NomFichier))
-            {
-                Console.WriteLine("Entrez le nom du chemin du fichier des comptes");
-                NomFichier = Console.ReadLine();
+            string NomFichier;
+            
+            Console.WriteLine("Entrez le nom du chemin du fichier de sortie des transactions");
+            NomFichier = Console.ReadLine();
+            NomFichier = "Resultat.txt";
 
-            }
-            file = File.Open((NomFichier), FileMode.Open, FileAccess.Read);
+
+           file = File.OpenWrite(NomFichier);
 
             
             str = new StreamWriter(file);
@@ -35,7 +35,7 @@ namespace SBanque
         }
         public void Ecriture_status (long idtran, Status status) 
         {
-            str.WriteLine(idtran + "  "+ status);
+            str.WriteLine(idtran + ";"+ status);
         }
         public void Fermer_status()
         {
