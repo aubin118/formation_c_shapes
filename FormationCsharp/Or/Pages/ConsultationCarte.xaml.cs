@@ -1,8 +1,12 @@
-﻿using System.Windows;
+﻿using Or.Business;
+using Or.Models;
+using System.Collections.Generic;
+using System.IO;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Navigation;
-using Or.Business;
-using Or.Models;
+using System.Xml.Serialization;
+
 
 namespace Or.Pages
 {
@@ -50,6 +54,7 @@ namespace Or.Pages
         {
             PageFunctionNavigate(new Depot(long.Parse(Numero.Text), _requests));
         }
+        
 
         void PageFunctionNavigate(PageFunction<long> page)
         {
@@ -73,6 +78,18 @@ namespace Or.Pages
                 gridView.Columns[2].Width = totalWidth * 0.30; // 20%
                 gridView.Columns[3].Width = totalWidth * 0.30; // 20%
             }
+        }
+        private void Export_transaction(object sender, RoutedEventArgs e)
+        {
+            StreamWriter str = new StreamWriter(File.OpenWrite($"C:\\Users\\Formation\\Desktop\\Export_trans.xml"));
+            Export_compte Export = new Export_compte(long.Parse(Numero.Text), _requests);
+
+            XmlSerializer serializer = new XmlSerializer(typeof(Export_compte));
+            
+
+            serializer.Serialize(str, Export);
+            str.Close();
+            MessageBox.Show("Export Réalisé");
         }
 
     }

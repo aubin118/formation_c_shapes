@@ -6,8 +6,6 @@ namespace Or.Business
 {
     public class TypeConverter : IValueConverter
     {
-        private static readonly CultureInfo EuroCulture = new CultureInfo("fr-FR");
-
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             if (value is Operation)

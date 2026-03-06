@@ -6,7 +6,7 @@ namespace Or.Business
 {
     public class EuroConverter : IValueConverter
     {
-        private static readonly CultureInfo EuroCulture = new CultureInfo("fr-FR");
+        public readonly static CultureInfo EuroCulture = new CultureInfo("fr-FR");
 
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {

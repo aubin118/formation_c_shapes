@@ -64,6 +64,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Business\Export_trans.cs" />
     <Compile Include="Business\TypeConverter.cs" />
     <Compile Include="Business\EuroConverter.cs" />
     <Compile Include="Business\IRequests.cs" />
