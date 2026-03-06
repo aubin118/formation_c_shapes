@@ -19,8 +19,19 @@ namespace Or.Business
         InterCompte = 2
     }
 
+    public enum Erreur
+    {
+        MontantInvalide = 1,
+        MontantNegative,
+        SoldeInsuffisant,
+        Compte_Livret,
+        Compte_inexistant,
+        Plafond_insuffisant
+    }
+
     public static class Tools
     {
+        public static Erreur Code_Erreur;
         public static DateTime ConversionDate(string horodatage)
         {
             CultureInfo culture = CultureInfo.CurrentCulture;
@@ -67,6 +78,30 @@ namespace Or.Business
             {
                 return Operation.InterCompte;
             }
+        }
+
+        public static string RetourErreur() 
+        {
+            
+            switch (Code_Erreur)
+            {
+                case Erreur.MontantInvalide:
+                    return "Montant invalide";
+                case Erreur.MontantNegative:
+                    return "Montant doit être positif";
+                case Erreur.SoldeInsuffisant:
+                    return "Solde insuffisant";
+                case Erreur.Compte_Livret:
+                    return "Virement externe que sur compte courant";
+                case Erreur.Compte_inexistant:
+                    return "Compte inexistant";
+                case Erreur.Plafond_insuffisant:
+                    return "Plafond insuffisant";
+                default:
+                    return "Erreur indéfinie";
+            }
+            
+
         }
     }
 }

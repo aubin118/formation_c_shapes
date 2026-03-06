@@ -11,6 +11,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Prj_Argent", "Prj_Argent\Pr
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bataille_Navale_A_Coutard", "Bataille_Navale_A_Coutard\Bataille_Navale_A_Coutard.csproj", "{9971F4DC-120D-4B41-B614-C577598BC117}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfApp", "..\..\Users\Formation\Downloads\WpfApp\WpfApp\WpfApp.csproj", "{E9D9AAF1-DC5C-E20C-0B32-E16933B0A7D5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Or", "Or\Or.csproj", "{8E58D626-3838-4CDA-8C69-B9C0386E35D2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -29,6 +33,14 @@ Global
 		{9971F4DC-120D-4B41-B614-C577598BC117}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9971F4DC-120D-4B41-B614-C577598BC117}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9971F4DC-120D-4B41-B614-C577598BC117}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E9D9AAF1-DC5C-E20C-0B32-E16933B0A7D5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E9D9AAF1-DC5C-E20C-0B32-E16933B0A7D5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E9D9AAF1-DC5C-E20C-0B32-E16933B0A7D5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E9D9AAF1-DC5C-E20C-0B32-E16933B0A7D5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8E58D626-3838-4CDA-8C69-B9C0386E35D2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8E58D626-3838-4CDA-8C69-B9C0386E35D2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8E58D626-3838-4CDA-8C69-B9C0386E35D2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8E58D626-3838-4CDA-8C69-B9C0386E35D2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,4 +1,5 @@
 ﻿using System;
+using Or.Business;
 
 namespace Or.Models
 {
@@ -9,6 +10,8 @@ namespace Or.Models
         public decimal Montant { get; set; }
         public int Expediteur { get; set; }
         public int Destinataire { get; set; }
+        public Operation TypeOperation { get; set; } 
+        
 
         public Transaction(int idTransaction, DateTime horodatage, decimal montant, int expediteur, int destinataire)
         {

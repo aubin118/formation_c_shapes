@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Or.Business;
+using System.Collections.Generic;
 
 namespace Or.Models
 {
@@ -32,6 +33,7 @@ namespace Or.Models
             }
             else
             {
+                Tools.Code_Erreur = Erreur.MontantNegative;
                 return false;
             }
         }
@@ -43,6 +45,7 @@ namespace Or.Models
         /// <returns>Statut du retrait</returns>
         public bool EstRetraitValide(Transaction transaction)
         {
+            
             if (EstRetraitAutorise(transaction.Montant))
             {
                 return true;
@@ -55,8 +58,12 @@ namespace Or.Models
 
         private bool EstRetraitAutorise(decimal montant)
         {
+            if (montant <= 0) { Tools.Code_Erreur = Erreur.MontantNegative; }
+            if (Solde < montant) { Tools.Code_Erreur = Erreur.SoldeInsuffisant; }
             return Solde >= montant && montant > 0;
         }
+
+        
 
     }
 }

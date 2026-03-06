@@ -67,12 +67,13 @@ namespace Or.Pages
                 }
                 else
                 {
-                    MessageBox.Show("Opération de virement non autorisé");
+                    MessageBox.Show(Tools.RetourErreur());
                 }
             }
             else
             {
-                MessageBox.Show("Montant invalide");
+                Tools.Code_Erreur = Erreur.MontantInvalide;
+                MessageBox.Show(Tools.RetourErreur());
             }
 
         }

@@ -22,6 +22,7 @@ namespace Or.Pages
             Numero.Text = c.Id.ToString();
             Prenom.Text = c.PrenomClient;
             Nom.Text = c.NomClient;
+            
 
             listView.ItemsSource = _requests.ListeComptesAssociesCarte(numCarte);
         }

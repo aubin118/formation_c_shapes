@@ -61,7 +61,13 @@ namespace Or.Models
         {
             List<Transaction> retraitsHisto = Historique.Where(x => (x.Horodatage > dateEffet.AddDays(-10)) && ListComptesId.Contains(x.Expediteur)).Select(x => x).ToList();
             decimal sommeHisto = montant + retraitsHisto.Sum(x => x.Montant);
-            return sommeHisto < Plafond;
+            if (sommeHisto < Plafond)
+           { return true; }
+            else 
+            {
+                Tools.Code_Erreur = Erreur.Plafond_insuffisant;
+                return false;
+            }
         }
 
 
@@ -74,8 +80,10 @@ namespace Or.Models
         private bool EstOperationAutoriseeContraintesComptes(Compte Expediteur, Compte Destinataire)
         {
             // Est-ce que la transaction demandée est possible ?
+            // quel est son utilité 
             if (Tools.EstTransactionExterieure(Expediteur.Id, Destinataire.Id))
             {
+
                 return false;
             }
 
@@ -98,6 +106,7 @@ namespace Or.Models
         /// <returns></returns>
         private bool EstComptePresent(int idtCpt)
         {
+            Tools.Code_Erreur = Erreur.Compte_inexistant;
             return ListComptesId.Exists(x => x == idtCpt);
         }
 
@@ -128,8 +137,14 @@ namespace Or.Models
         {
             Operation operation = Tools.TypeTransaction(Expediteur.Id, Destinataire.Id);
 
-            return operation == Operation.InterCompte &&
-                   Expediteur.TypeDuCompte == TypeCompte.Courant && Destinataire.TypeDuCompte == TypeCompte.Courant ;
+            if (operation == Operation.InterCompte &&
+                   Expediteur.TypeDuCompte == TypeCompte.Courant && Destinataire.TypeDuCompte == TypeCompte.Courant) 
+            { return true; }
+            else 
+            {
+                Tools.Code_Erreur = Erreur.Compte_Livret;
+                return false;
+            }
         }
 
     }

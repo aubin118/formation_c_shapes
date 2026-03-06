@@ -27,11 +27,15 @@ namespace Or.Pages
             Solde.Text = c.Solde.ToString("C2");
 
             List<Transaction> transactions = _requests.ListeTransactionsAssociesCompte(compte);
+            for (int i = 0; i < transactions.Count; i++)
+            {
+                transactions[i].TypeOperation = Tools.TypeTransaction(transactions[i].Expediteur, transactions[i].Destinataire);
+            }
 
             // - si opération de débit, + si opération de crédit
             transactions.ForEach(x => x.Montant = x.Expediteur == c.Id ? -x.Montant : x.Montant);
 
-            listView.ItemsSource = transactions;
+            listView.ItemsSource = (transactions);
 
         }
 
@@ -51,5 +55,7 @@ namespace Or.Pages
                 gridView.Columns[2].Width = totalWidth * 0.45; // 20%
             }
         }
+        
+
     }
 }

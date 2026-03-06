@@ -55,12 +55,13 @@ namespace Or.Pages
                 }
                 else
                 {
-                    MessageBox.Show("Opération de retrait non authorisée");
+                    MessageBox.Show(Tools.RetourErreur());
                 }
             }
             else
             {
-                MessageBox.Show("Montant invalide");
+                Tools.Code_Erreur = Erreur.MontantInvalide;
+                MessageBox.Show(Tools.RetourErreur());
             }
         }
         private string SoldeCarteActuel() 

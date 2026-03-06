@@ -51,12 +51,13 @@ namespace Or.Pages
                 }
                 else
                 {
-                    MessageBox.Show("Opération refusée");
+                    MessageBox.Show(Tools.RetourErreur());
                 }
             }
             else
             {
-                MessageBox.Show("Montant invalide");
+                Tools.Code_Erreur = Erreur.MontantInvalide;
+                MessageBox.Show(Tools.RetourErreur());
             }
         }
     }
