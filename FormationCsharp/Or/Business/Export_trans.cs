@@ -1,11 +1,5 @@
 ﻿using Or.Models;
-using System;
 using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Numerics;
-using System.Text;
-using System.Threading.Tasks;
 using System.Xml.Serialization;
 
 namespace Or.Business
@@ -62,7 +56,7 @@ namespace Or.Business
             }
             set { }
         }
-
+        // Les setteurs sont à implémenter pour la partie Import
 
         [XmlIgnore]
         public decimal Solde { get; private set; }

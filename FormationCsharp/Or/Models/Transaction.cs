@@ -15,7 +15,7 @@ namespace Or.Models
         { 
             get
             {
-                return Horodatage.ToString("dd-MM-yyyy HH:mm:ss") ;
+                return Horodatage.ToString("dd/MM/yyyy HH:mm:ss") ; // Attention au format Date
             }
             set { }
         }
@@ -36,7 +36,7 @@ namespace Or.Models
 
         [XmlIgnore]
         public int Expediteur { get; set; }
-        public string CompteExpediteur 
+        public string CompteExpediteur
         {
             get
             {

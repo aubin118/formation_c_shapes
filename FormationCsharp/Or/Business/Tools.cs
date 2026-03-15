@@ -80,6 +80,7 @@ namespace Or.Business
             }
         }
 
+        // Bonne idée de centraliser le traitement des cas d'erreurs - souvent table en BDD pour ça avec les codes erreurs
         public static string RetourErreur() 
         {
             
@@ -92,7 +93,7 @@ namespace Or.Business
                 case Erreur.SoldeInsuffisant:
                     return "Solde insuffisant";
                 case Erreur.Compte_Livret:
-                    return "Virement externe que sur compte courant";
+                    return "Virement externe que sur un compte courant";
                 case Erreur.Compte_inexistant:
                     return "Compte inexistant";
                 case Erreur.Plafond_insuffisant:
