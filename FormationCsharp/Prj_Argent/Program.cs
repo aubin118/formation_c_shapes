@@ -10,6 +10,7 @@ namespace Prj_Argent
     {
         static void Main(string[] args)
         {
+            // J'aime bien, j'aime bien ;)
             Banque picsou = new Banque();
             Console.ReadKey();
         }

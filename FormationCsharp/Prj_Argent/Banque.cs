@@ -4,10 +4,6 @@ using EBanque;
 using SBanque;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
 using TBanque;
 
 namespace Prj_Argent
@@ -37,19 +33,19 @@ namespace Prj_Argent
 
             while (!entree.strT.EndOfStream)
             {
-                
+
                 Transaction tran_actuelle = entree.Transaction_lecture();
-                
+
                 if (tran_actuelle._Numtran != 0)
                 {
-                   
+
                     if (tran_actuelle._NumCptExp != (long)0 && tran_actuelle._NumCptDes != (long)0)
                     {
                         if (DCpt.TryGetValue(tran_actuelle._NumCptExp, out CptB cpt_exp) &&
                             DCpt.TryGetValue(tran_actuelle._NumCptDes, out CptB cpt_des) &&
                             DCB.TryGetValue(cpt_exp._CptNumCarte, out CarteB CarteB_exp))
                         {
-                            
+
 
                             if (cpt_exp._CptTypeCompte == 0 &&
                                 cpt_des._CptTypeCompte == 0)
@@ -57,24 +53,24 @@ namespace Prj_Argent
                                 TimeSpan diff_temps = new TimeSpan(10);
                                 decimal somme = tran_actuelle._Montant;
 
-                                foreach (Transaction tran in CarteB_exp._CBHistorique)
+                                foreach (Transaction tran in CarteB_exp.CBHistorique)
                                 {
                                     if (tran.Date_tran + diff_temps > tran_actuelle.Date_tran)
                                     {
                                         somme += tran._Montant;
 
                                     }
-                                    if (somme > CarteB_exp._CBplafond)
+                                    if (somme > CarteB_exp.CBplafond)
                                     {
                                         break;
                                     }
                                 }
-                                if (somme < CarteB_exp._CBplafond)
+                                if (somme < CarteB_exp.CBplafond)
                                 {
                                     if (cpt_exp.MAJ_solde((tran_actuelle._Montant * -1)))
                                     {
                                         cpt_des.MAJ_solde(tran_actuelle._Montant);
-                                        CarteB_exp.ajout_transaction(tran_actuelle);
+                                        CarteB_exp.Ajout_transaction(tran_actuelle);
                                         tran_actuelle.TransactionOK();
                                     }
                                     else
@@ -97,7 +93,7 @@ namespace Prj_Argent
                                     if (cpt_exp.MAJ_solde((tran_actuelle._Montant * -1)))
                                     {
                                         cpt_des.MAJ_solde(tran_actuelle._Montant);
-                                        CarteB_exp.ajout_transaction(tran_actuelle);
+                                        CarteB_exp.Ajout_transaction(tran_actuelle);
                                         tran_actuelle.TransactionOK();
                                     }
                                     else
@@ -124,27 +120,27 @@ namespace Prj_Argent
                         if (DCpt.TryGetValue(tran_actuelle._NumCptExp, out CptB cpt_exp) &&
                             DCB.TryGetValue(cpt_exp._CptNumCarte, out CarteB CarteB_exp))
                         {
-                            
+
                             TimeSpan diff_temps = new TimeSpan(10);
                             decimal somme = tran_actuelle._Montant;
 
-                            foreach (Transaction tran in CarteB_exp._CBHistorique)
+                            foreach (Transaction tran in CarteB_exp.CBHistorique)
                             {
                                 if (tran.Date_tran + diff_temps > tran_actuelle.Date_tran)
                                 {
                                     somme += tran._Montant;
 
                                 }
-                                if (somme > CarteB_exp._CBplafond)
+                                if (somme > CarteB_exp.CBplafond)
                                 {
                                     break;
                                 }
                             }
-                            if (somme < CarteB_exp._CBplafond)
+                            if (somme < CarteB_exp.CBplafond)
                             {
                                 if (cpt_exp.MAJ_solde((tran_actuelle._Montant * -1)))
                                 {
-                                    CarteB_exp.ajout_transaction(tran_actuelle);
+                                    CarteB_exp.Ajout_transaction(tran_actuelle);
                                     tran_actuelle.TransactionOK();
                                 }
                                 else
@@ -162,7 +158,7 @@ namespace Prj_Argent
                     {
                         if (DCpt.TryGetValue(tran_actuelle._NumCptDes, out CptB cpt_des))
                         {
-                            
+
                             cpt_des.MAJ_solde(tran_actuelle._Montant);
                             tran_actuelle.TransactionOK();
 
@@ -180,6 +176,7 @@ namespace Prj_Argent
                 }
             }
 
+            // On évite le code mort
             /*foreach (KeyValuePair<long, CptB> e in DCpt)
             {
                 Console.WriteLine($"{e.Value._CptNumCpt}  {e.Value._CptSolde} ");
@@ -189,7 +186,6 @@ namespace Prj_Argent
             Console.WriteLine("fin du traitement");
 
         }
-        
 
     }
 }

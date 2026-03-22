@@ -1,12 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
-using CBBanque;
-
-namespace CptBanque
+﻿namespace CptBanque
 {
     public enum TypeCompte
     {
@@ -21,32 +13,30 @@ namespace CptBanque
         public decimal _CptSolde { get; private set; }
 
 
-
-        public CptB (string line)
+        public CptB(string line)
         {
 
-            string [] cpt_tab = line.Split(';');
-            
-            long num_cpt ;
+            string[] cpt_tab = line.Split(';');
+
+            long num_cpt;
 
 
             if (cpt_tab.Length == 4 && long.TryParse(cpt_tab[0], out num_cpt))
             {
-
-                    long test_long;
-                    if (cpt_tab[1].Length == 16 && long.TryParse(cpt_tab[1].Substring(0, 8), out test_long) && long.TryParse(cpt_tab[1].Substring(8, 8), out test_long))
+                long test_long;
+                if (cpt_tab[1].Length == 16 && long.TryParse(cpt_tab[1].Substring(0, 8), out test_long) && long.TryParse(cpt_tab[1].Substring(8, 8), out test_long))
+                {
+                    if (cpt_tab[2] == "Courant" || cpt_tab[2] == "Livret")
                     {
-                        if (cpt_tab[2] == "Courant" || cpt_tab[2] == "Livret") 
-                        {
-                            decimal solde;
-                        
+                        decimal solde;
 
-                        if ( !string.IsNullOrWhiteSpace(cpt_tab[3]))
+                        // Test pour le solde
+                        if (!string.IsNullOrWhiteSpace(cpt_tab[3]))
                         {
-                            
+
                             cpt_tab[3] = cpt_tab[3].Replace('.', ',');
 
-                            if (decimal.TryParse(cpt_tab[3], out solde) )
+                            if (decimal.TryParse(cpt_tab[3], out solde))
                             {
 
                                 if (cpt_tab[2] == "Courant")
@@ -68,6 +58,7 @@ namespace CptBanque
 
                             solde = 0;
 
+                            // Duplication de code, tu pourrais refactoriser
                             if (cpt_tab[2] == "Courant")
                             {
                                 _CptTypeCompte = TypeCompte.Courant;
@@ -80,24 +71,25 @@ namespace CptBanque
                             _CptNumCarte = cpt_tab[1];
                             _CptNumCpt = num_cpt;
                         }
-                        }
                     }
-                
+                }
+
             }
         }
-        public bool MAJ_solde(decimal montant) 
+
+        public bool MAJ_solde(decimal montant)
         {
-            
+            // Bien
             if (_CptSolde + montant < 0)
             {
-                return false; 
+                return false;
             }
             else
-            { 
+            {
                 _CptSolde += montant;
                 return true;
             }
         }
     }
-    
+
 }

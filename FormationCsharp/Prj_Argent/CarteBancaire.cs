@@ -1,39 +1,34 @@
 ﻿using TBanque;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Security.Cryptography.X509Certificates;
 
 namespace CBBanque
 {
     public class CarteB
 
     {
-        public string _CBNumCarte { get; private set; }
-        public List <long> _CBNumCpts { get; private set; }
-        public List<Transaction> _CBHistorique { get; private set; }
-        public decimal _CBplafond { get; private set; }
-
-
-
+        // Bonne pratique - les propriétés en lecture seule en dehors de l'instance
+        public string CBNumCarte { get; private set; }
+        public List <long> CBNumCpts { get; private set; }
+        public List<Transaction> CBHistorique { get; private set; }
+        public decimal CBplafond { get; private set; }
 
         public CarteB(string line)
         {
-            _CBNumCpts = new List<long>();
-            _CBHistorique = new List<Transaction>();
+            CBNumCpts = new List<long>();
+            CBHistorique = new List<Transaction>();
 
 
             string[] CB_tab = line.Split(';');
             long test_long;
+            // Compliqué, non - tu ne peux pas utiliser ?
+            // bool allDigits = !string.IsNullOrEmpty(CB_tab[0]) && CB_tab[0].All(char.IsDigit);
             if (CB_tab[0].Length == 16 && long.TryParse(CB_tab[0].Substring(0, 8), out test_long) && long.TryParse(CB_tab[0].Substring(8, 8), out test_long))
             {
                 if (string.IsNullOrWhiteSpace(CB_tab[1]))
                 {
-                    _CBNumCarte = CB_tab[0];
-                    _CBplafond = 500;
-
+                    CBNumCarte = CB_tab[0];
+                    CBplafond = 500;
                 }
                 else
                 {
@@ -42,17 +37,17 @@ namespace CBBanque
                     {
                         if (plafond >= 500 && plafond <= 3000)
                         {
-                            _CBNumCarte = CB_tab[0];
-                            _CBplafond = plafond;
+                            CBNumCarte = CB_tab[0];
+                            CBplafond = plafond;
                         }
                     }
                 }
             }
             
         }
-        public void ajout_transaction(Transaction transaction) 
+        public void Ajout_transaction(Transaction transaction) 
         {
-            _CBHistorique.Add(transaction);
+            CBHistorique.Add(transaction);
         }
     }
 }
